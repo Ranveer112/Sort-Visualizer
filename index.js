@@ -1,7 +1,6 @@
 /*
  * Name: Ranveer Randhawa
  * Date: April 22, 2020
- * Section: CSE 154 A
  *
  * This is the JS to implement the backend of my insertion sort webpage.
  * It responds to mouse click using even listener.
