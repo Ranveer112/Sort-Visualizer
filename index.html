@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+  Name: Ranveer Randhawa
+  Date: April 22, 2020
+  Section: CSE 154 A
+  This is the index.html file which has all the content for my insertion sort
+  visualizer.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SortingVisualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default"></script>
+</head>
+
+<body>
+    <div class="heading">
+        <h2>Insertion Sort Visualizer</h2>
+    </div>
+
+    <div id="description">
+        <p>
+            Insertion sort is one of the common sorting algorithms in computer
+            science. Although, it is not that effiecient considering it makes
+            \(O(n^2)\) comparisions in the worst case where \(n\) is the size
+            of the data, it is a better sorting algorithm compared to bubble
+            sort and is fairly easy to implement . To visualize how it works,
+            press the sort button and the sticks will sort themselves. Try
+            different shuffles by pressing shuffle button. However, beware, you
+            cannot shuffle while the array is being sorted.
+        </p>
+        <div class="yardsticks">
+        </div>
+        <button class="sort" type="button">
+            Sort
+        </button>
+        <button class="shuffle" type="button">
+            Shuffle
+        </button>
+    </div>
+    <div class="comparisions">
+        <p>Number of comparisions:0</p>
+    </div>
+</body>
+
+</html>

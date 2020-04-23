@@ -1,0 +1,62 @@
+/*
+ * Name: Ranveer Randhawa
+ * Date: April 22, 2020
+ * Section: CSE 154 A
+ *
+ * This is the css file to style the webpage.
+ */
+body {
+  background-color: rgba(211, 145, 23, 0.568);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 30px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: row;
+  color: #d36811;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 100px;
+}
+
+#description {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  background-color: #e0dbd7;
+  padding: 30px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+.yardsticks {
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+}
+
+.sort,
+.shuffle {
+  height: 75px;
+  width: 150px;
+  flex-direction: row;
+  background-color: turquoise;
+  align-self: center;
+  justify-content: center;
+}
+
+.comparisions {
+  display: flex;
+  padding: 30px;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+  background-color: brown;
+}
