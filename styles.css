@@ -28,6 +28,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #e0dbd7;
+  flex-wrap: wrap;
   padding: 30px;
   margin-top: 20px;
   margin-left: auto;
@@ -36,9 +37,12 @@ body {
 }
 
 .yardsticks {
+  display: flex;
+  width:100%;
   flex-direction: row;
   align-self: center;
   justify-content: center;
+  align-items: flex-start;
 }
 
 .sort,
@@ -58,4 +62,16 @@ body {
   align-self: center;
   justify-content: center;
   background-color: brown;
+}
+
+.sticks{
+  width:4px;
+  background-color:blue;
+  margin:3px;
+}
+
+#description p{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

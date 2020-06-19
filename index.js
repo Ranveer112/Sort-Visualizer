@@ -8,26 +8,8 @@
 "use strict";
 (function() {
   window.addEventListener("load", init);
-  const img1 = gen("img");
-  img1.src = "1.png";
-  const img2 = gen("img");
-  img2.src = "2.png";
-  const img3 = gen("img");
-  img3.src = "3.png";
-  const img4 = gen("img");
-  img4.src = "4.png";
-  const img5 = gen("img");
-  img5.src = "5.png";
-  const img6 = gen("img");
-  img6.src = "6.png";
-  const img7 = gen("img");
-  img7.src = "7.png";
-  const img8 = gen("img");
-  img8.src = "8.png";
-  const arr = [img1, img2, img3, img4, img5, img6, img7, img8];
   let button;
   let button2;
-
   /**
    * Event listerns to different clicks.
    */
@@ -35,40 +17,60 @@
     button = qs(".sort");
     button2 = qs(".shuffle");
     button2.addEventListener("click", populate);
-    button.addEventListener("click", insertionSort);
+    button.addEventListener("click", sort);
   }
 
+ 
   /**
    * Function which populates the sticks randomly
    */
   function populate() {
-    button.removeEventListener("click", insertionSort);
-    qs(".comparisions").textContent = "Number of Comparisions:0";
-    shuffle(arr);
+    button.removeEventListener("click", sort);
+    qs(".comparisions").textContent = "Time taken(in ms):0";
     let parent = qs(".yardsticks");
-    for (let index = 0; index < arr.length; index++) {
-      parent.appendChild(arr[index]);
+    parent.innerHTML='';
+    for (let index = 0; index < 90; index++) {
+      let stick=gen("div");
+      stick.classList.add("sticks");
+      let randnum=Math.floor(Math.random() * (110)) + 100;
+      stick.style.height=randnum.toString()+'px';
+      
+      parent.appendChild(stick);
     }
-    button.addEventListener("click", insertionSort);
+    button.addEventListener("click", sort);
   }
 
+
   /**
-   * Fisher yates algorithm to shuffle an array. Taken from community wiki at
-   * https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
-   * @param {img} array of all the image nodes
-   * @return {img} array of all the shuffled image nodes
+   * Sort helper method-responsible for calling appropriate sorting algorithm.
    */
-  function shuffle(array) {
-    let j = 0;
-    let temp = 0;
-    for (let i = array.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
+  function sort() {
+    let options = qs("p");
+    console.log(options);
+    if (options.children[0].children[0].checked) {
+      mergeSort();
+      return;
     }
-    return array;
+    if (options.children[1].children[0].checked) {
+      bubbleSort();
+      return;
+    }
+    if (options.children[2].children[0].checked) {
+      selectionSort();
+      return;
+    }
+    if (options.children[3].children[0].checked) {
+      insertionSort();
+      return;
+    }
+
+    if (options.children[4].children[0].checked) {
+      quickSort();
+    }
+
+
   }
+ 
 
   /**
    * This function is responsible for sorting the sticks using the famous
@@ -76,25 +78,77 @@
    * sorting as an animation.
    */
   async function insertionSort() {
+    button.removeEventListener("click", sort);
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
-    let comparisions = 0;
+    let date = new Date();
     for (let index = 0; index < sticks.children.length; index++) {
-      let curr = sticks.children[index].height;
+      let curr = sticks.children[index].style.height;
       let runner = index - 1;
-      while (runner >= 0 && sticks.children[runner].height >= curr) {
+      while (runner >= 0 && sticks.children[runner].style.height >= curr) {
         sticks.insertBefore(
           sticks.children[runner + 1],
           sticks.children[runner]
         );
-        comparisions++;
-        qs(".comparisions").textContent =
-          "Number of Comparisions:" + comparisions;
         runner = runner - 1;
-        await sleep(500);
+        await sleep(1);
       }
     }
+    qs(".comparisions").textContent =
+          "Time taken(in ms):" + date.getTime();
     button2.addEventListener("click", populate);
+    button.addEventListener("click", sort);
+  }
+  /**
+   * This function is responsible for sorting the sticks using the famous
+   * algorithm of bubble sort. It is an async function to simulate the
+   * sorting as an animation.
+   */
+  async function bubbleSort() {
+    button.removeEventListener("click", sort);
+    button2.removeEventListener("click", populate);
+    let sticks = qs(".yardsticks");
+    let date = new Date();
+    for (let i = 0; i < sticks.children.length; i++) {
+      for (let j = sticks.children.length - 1; j > 0; j--) {
+        if (sticks.children[j].style.height < sticks.children[j - 1].style.height) {
+          sticks.insertBefore(sticks.children[j], sticks.children[j - 1]);
+        }
+        await sleep(1);
+      }
+    }
+    qs(".comparisions").textContent =
+          "Time taken(in ms):" + date.getTime();
+    button2.addEventListener("click", populate);
+    button.addEventListener("click", sort);
+  }
+  /**
+   * This function is responsible for sorting the sticks using the famous
+   * algorithm of selection sort. It is an async function to simulate the
+   * sorting as an animation.
+   */
+  async function selectionSort() {
+    button2.removeEventListener("click", populate);
+    let sticks = qs(".yardsticks");
+    let comparisions = 0;
+
+    button2.addEventListener("click", populate);
+    
+  }
+  /**
+   * This function is responsible for sorting the sticks using the famous
+   * algorithm of merge sort. It is an async function to simulate the
+   * sorting as an animation.
+   */
+  async function mergeSort() {
+    button2.removeEventListener("click", populate);
+    let sticks = qs(".yardsticks");
+    let comparisions = 0;
+
+    button2.addEventListener("click", populate);
+  }
+  async function quickSort(){
+
   }
 
   /**

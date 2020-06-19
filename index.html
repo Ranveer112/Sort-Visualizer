@@ -18,20 +18,18 @@
 
 <body>
     <div class="heading">
-        <h2>Insertion Sort Visualizer</h2>
+        <h2>Sorting Visualizer</h2>
     </div>
 
     <div id="description">
         <p>
-            Insertion sort is one of the common sorting algorithms in computer
-            science. Although, it is not that effiecient considering it makes
-            \(O(n^2)\) comparisions in the worst case where \(n\) is the size
-            of the data, it is a better sorting algorithm compared to bubble
-            sort and is fairly easy to implement . To visualize how it works,
-            press the sort button and the sticks will sort themselves. Try
-            different shuffles by pressing shuffle button. However, beware, you
-            cannot shuffle while the array is being sorted.
+            <label><input type="radio" name="diff" value="easy" checked> MergeSort</label>
+            <label><input type="radio" name="diff" value="standard"> BubbleSort</label>
+            <label><input type="radio" name="diff" value="standard"> SelectionSort</label>
+            <label><input type="radio" name="diff" value="standard"> InsertionSort</label>
+            <label><input type="radio" name="diff" value="standard"> QuickSort</label>
         </p>
+
         <div class="yardsticks">
         </div>
         <button class="sort" type="button">
@@ -44,6 +42,7 @@
     <div class="comparisions">
         <p>Number of comparisions:0</p>
     </div>
+
 </body>
 
 </html>
