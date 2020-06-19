@@ -140,7 +140,7 @@
    * algorithm of merge sort. It is an async function to simulate the
    * sorting as an animation.
    */
-  async function mergeSort() {
+  function mergeSort() {
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
     divide(0, sticks.children.length-1);
@@ -148,7 +148,7 @@
     button2.addEventListener("click", populate);
   }
 
-  async function divide(start, end){
+  function divide(start, end){
     if(start==end){
       return;
     }
@@ -157,7 +157,7 @@
     divide(1+middle, end);
     merge(start, middle, middle+1, end);
   }
-  async function merge(start1, end1, start2, end2){
+  function merge(start1, end1, start2, end2){
     let i=start1;
     let j=start2;
     let sticks = qs(".yardsticks");
