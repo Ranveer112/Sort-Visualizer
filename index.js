@@ -29,7 +29,7 @@
     qs(".comparisions").textContent = "Time taken(in ms):0";
     let parent = qs(".yardsticks");
     parent.innerHTML='';
-    for (let index = 0; index < 90; index++) {
+    for (let index = 0; index < 100; index++) {
       let stick=gen("div");
       stick.classList.add("sticks");
       let randnum=Math.floor(Math.random() * (110)) + 100;
@@ -143,14 +143,37 @@
   async function mergeSort() {
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
-    let comparisions = 0;
+    divide(0, sticks.children.length-1);
 
     button2.addEventListener("click", populate);
   }
-  async function quickSort(){
+
+  async function divide(start, end){
+    if(start==end){
+      return;
+    }
+    let middle=Math.floor((start+end)/2);
+    divide(start, middle);
+    divide(1+middle, end);
+    merge(start, middle, middle+1, end);
+  }
+  async function merge(start1, end1, start2, end2){
+    let i=start1;
+    let j=start2;
+    let sticks = qs(".yardsticks");
+    while(i<=end1 && j<=end2){
+      if(sticks.children[i].style.height>sticks.children[j].style.height){
+        sticks.insertBefore(sticks.children[j], sticks.children[i]);
+        console.log(sticks);
+        i++;
+        end1++;
+        j++;
+        continue;
+      }
+      i++;
+    }
 
   }
-
   /**
    * Makes the program sleep for input milliseconds.
    * @param {int} time Time to sleep for(in milliseconds)
