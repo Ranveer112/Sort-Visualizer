@@ -75,3 +75,6 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
 }
+.sorted{
+  background-color: red;
+}

@@ -29,7 +29,7 @@
     qs(".comparisions").textContent = "Time taken(in ms):0";
     let parent = qs(".yardsticks");
     parent.innerHTML='';
-    for (let index = 0; index < 100; index++) {
+    for (let index = 0; index < 128; index++) {
       let stick=gen("div");
       stick.classList.add("sticks");
       let randnum=Math.floor(Math.random() * (110)) + 100;
@@ -46,8 +46,8 @@
    */
   function sort() {
     let options = qs("p");
-    console.log(options);
     if (options.children[0].children[0].checked) {
+      console.log("ree");
       mergeSort();
       return;
     }
@@ -140,31 +140,37 @@
    * algorithm of merge sort. It is an async function to simulate the
    * sorting as an animation.
    */
-  function mergeSort() {
+  async function mergeSort() {
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
-    divide(0, sticks.children.length-1);
+    let windowSize=2;
+    while(windowSize<=sticks.children.length){
+      
+      for(let index=0;index<=sticks.children.length-windowSize;index+=windowSize){
+        for(let runner=index;runner<=index+windowSize-1;runner++){
+          sticks.children[runner].classList.add("sorted");
+        }
+        let middle=Math.floor((windowSize-1)/2);
+        merge(index, index+middle, index+middle+1, index+windowSize-1);
+        await sleep(100);
+        for(let runner=index;runner<=index+windowSize-1;runner++){
+          sticks.children[runner].classList.remove("sorted");
+        }
+        
+      }
+      windowSize=windowSize*2;
+    }
 
     button2.addEventListener("click", populate);
   }
 
-  function divide(start, end){
-    if(start==end){
-      return;
-    }
-    let middle=Math.floor((start+end)/2);
-    divide(start, middle);
-    divide(1+middle, end);
-    merge(start, middle, middle+1, end);
-  }
-  function merge(start1, end1, start2, end2){
+  async function merge(start1, end1, start2, end2){
     let i=start1;
     let j=start2;
     let sticks = qs(".yardsticks");
     while(i<=end1 && j<=end2){
       if(sticks.children[i].style.height>sticks.children[j].style.height){
         sticks.insertBefore(sticks.children[j], sticks.children[i]);
-        console.log(sticks);
         i++;
         end1++;
         j++;
@@ -172,6 +178,8 @@
       }
       i++;
     }
+    
+    
 
   }
   /**
