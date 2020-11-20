@@ -91,7 +91,7 @@
           sticks.children[runner]
         );
         runner = runner - 1;
-        await sleep(1);
+        await sleep(100);
       }
     }
     qs(".comparisions").textContent =
@@ -114,7 +114,7 @@
         if (sticks.children[j].style.height < sticks.children[j - 1].style.height) {
           sticks.insertBefore(sticks.children[j], sticks.children[j - 1]);
         }
-        await sleep(1);
+        await sleep(100);
       }
     }
     qs(".comparisions").textContent =
