@@ -110,12 +110,14 @@
     let sticks = qs(".yardsticks");
     let date = new Date();
     for (let i = 0; i < sticks.children.length; i++) {
+      sticks.children[i].classList.add("sorted");
       for (let j = sticks.children.length - 1; j > 0; j--) {
         if (sticks.children[j].style.height < sticks.children[j - 1].style.height) {
           sticks.insertBefore(sticks.children[j], sticks.children[j - 1]);
         }
         await sleep(100);
       }
+      sticks.children[j].classList.remove("sorted");
     }
     qs(".comparisions").textContent =
           "Time taken(in ms):" + date.getTime();
