@@ -144,6 +144,7 @@
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
     let windowSize=2;
+    let date = new Date();
     while(windowSize<=sticks.children.length){
       
       for(let index=0;index<=sticks.children.length-windowSize;index+=windowSize){
@@ -160,7 +161,8 @@
       }
       windowSize=windowSize*2;
     }
-
+    qs(".comparisions").textContent =
+          "Time taken(in ms):" + date.getTime();
     button2.addEventListener("click", populate);
   }
 
