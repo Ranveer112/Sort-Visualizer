@@ -117,7 +117,7 @@
         }
         await sleep(100);
       }
-      sticks.children[j].classList.remove("sorted");
+      sticks.children[i].classList.remove("sorted");
     }
     qs(".comparisions").textContent =
           "Time taken(in ms):" + date.getTime();
