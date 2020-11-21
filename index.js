@@ -93,7 +93,7 @@
         runner = runner - 1;
         await sleep(100);
       }
-      sticks.children[runner].classList.add("sorted");
+      sticks.children[runner+1].classList.add("sorted");
     }
     qs(".comparisions").textContent =
           "Time taken(in ms):" + date.getTime();
