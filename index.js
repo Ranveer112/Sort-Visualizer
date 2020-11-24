@@ -185,8 +185,7 @@
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
     let stack=[];
-    let interval=[0, sticks.children.length];
-    let depth=0;
+    let interval=[0, sticks.children.length]; 
     stack.push(interval);
     while(stack.length!=0){
       interval=stack.pop();
@@ -221,8 +220,7 @@
       interval=[left, middle];
       stack.push(interval);
       interval=[middle+1, right];
-      stack.splice(depth, 0, interval);
-      depth++;
+      stack.push(interval);
     }
 
   }
