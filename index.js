@@ -26,7 +26,6 @@
    */
   function populate() {
     button.removeEventListener("click", sort);
-    qs(".comparisions").textContent = "Time taken(in ms):0";
     let parent = qs(".yardsticks");
     parent.innerHTML='';
     for (let index = 0; index < 128; index++) {
@@ -81,7 +80,6 @@
     button.removeEventListener("click", sort);
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
-    let date = new Date();
     for (let index = 0; index < sticks.children.length; index++) {
       let curr = sticks.children[index].style.height;
       let runner = index - 1;
@@ -95,8 +93,6 @@
       }
       sticks.children[runner+1].classList.add("sorted");
     }
-    qs(".comparisions").textContent =
-          "Time taken(in ms):" + date.getTime();
     button2.addEventListener("click", populate);
     button.addEventListener("click", sort);
   }
@@ -109,7 +105,6 @@
     button.removeEventListener("click", sort);
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
-    let date = new Date();
     for (let i = 0; i < sticks.children.length; i++) {
       for (let j = sticks.children.length - 1; j > 0; j--) {
         sticks.children[j].classList.add("sorted");
@@ -123,8 +118,6 @@
       }
       
     }
-    qs(".comparisions").textContent =
-          "Time taken(in ms):" + date.getTime();
     button2.addEventListener("click", populate);
     button.addEventListener("click", sort);
   }
@@ -150,7 +143,6 @@
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
     let windowSize=2;
-    let date = new Date();
     while(windowSize<=sticks.children.length){
       
       for(let index=0;index<=sticks.children.length-windowSize;index+=windowSize){
@@ -167,8 +159,6 @@
       }
       windowSize=windowSize*2;
     }
-    qs(".comparisions").textContent =
-          "Time taken(in ms):" + date.getTime();
     button2.addEventListener("click", populate);
   }
 
