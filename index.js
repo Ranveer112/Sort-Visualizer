@@ -186,33 +186,43 @@
     let sticks = qs(".yardsticks");
     let stack=[];
     let interval=[0, sticks.children.length];
-    stack.add(interval);
+    let depth=0;
+    stack.push(interval);
     while(stack.length!=0){
       interval=stack.pop();
       let left=interval[0];
       let right=interval[1];
-      let middle=left+(right-left)/2;
-      sticks.children[middle].classList.add("sorted");
-      for(let i=0;i<=middle;i++){
+      if(left>=right){
+        continue;
+      }
+      let middle=Math.floor((left+(right-left)/2));
+      for(let i=left;i<right;i++){
+        sticks.children[i].classList.add("sorted");
+      }
+      for(let i=0;i<middle;i++){
         if(sticks.children[i].style.height>sticks.children[middle].style.height){
-          sticks.insertBefore(sticks.children[middle], sticks.children[i]);
+          sticks.insertBefore(sticks.children[i], sticks.children[middle]);
           sticks.insertBefore(sticks.children[middle], sticks.children[middle-1]);
           await sleep(100);
+          i--;
           middle--;
         }
       }
-      for(let i=middle;i<sticks.children.length;i++){
+      for(let i=middle+1;i<sticks.children.length;i++){
         if(sticks.children[i].style.height<sticks.children[middle].style.height){
-          sticks.insertBefore(sticks.children[middle], sticks.children[i]);
+          sticks.insertBefore(sticks.children[i], sticks.children[middle]);
           await sleep(100);
           middle++;
         }
       }
-      sticks.children[middle].classList.remove("sorted");
+      for(let i=left;i<right;i++){
+        sticks.children[i].classList.remove("sorted");
+      }
       interval=[left, middle];
       stack.push(interval);
       interval=[middle+1, right];
-      stack.push(interval);
+      stack.splice(depth, 0, interval);
+      depth++;
     }
 
   }
