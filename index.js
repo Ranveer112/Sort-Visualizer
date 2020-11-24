@@ -176,8 +176,44 @@
       }
       i++;
     }
-    
-    
+
+  }
+  /**
+   * Quick sort function with Pivot choice as the middle element
+   */
+  async function quickSort(){
+    button2.removeEventListener("click", populate);
+    let sticks = qs(".yardsticks");
+    let stack=[];
+    let interval=[0, sticks.children.length];
+    stack.add(interval);
+    while(stack.length!=0){
+      interval=stack.pop();
+      let left=interval[0];
+      let right=interval[1];
+      let middle=left+(right-left)/2;
+      sticks.children[middle].classList.add("sorted");
+      for(let i=0;i<=middle;i++){
+        if(sticks.children[i].style.height>sticks.children[middle].style.height){
+          sticks.insertBefore(sticks.children[middle], sticks.children[i]);
+          sticks.insertBefore(sticks.children[middle], sticks.children[middle-1]);
+          await sleep(100);
+          middle--;
+        }
+      }
+      for(let i=middle;i<sticks.children.length;i++){
+        if(sticks.children[i].style.height<sticks.children[middle].style.height){
+          sticks.insertBefore(sticks.children[middle], sticks.children[i]);
+          await sleep(100);
+          middle++;
+        }
+      }
+      sticks.children[middle].classList.remove("sorted");
+      interval=[left, middle];
+      stack.push(interval);
+      interval=[middle+1, right];
+      stack.push(interval);
+    }
 
   }
   /**
