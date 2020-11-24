@@ -55,15 +55,6 @@ body {
   justify-content: center;
 }
 
-.comparisions {
-  display: flex;
-  padding: 30px;
-  flex-direction: row;
-  align-self: center;
-  justify-content: center;
-  background-color: brown;
-}
-
 .sticks{
   width:4px;
   background-color:blue;
