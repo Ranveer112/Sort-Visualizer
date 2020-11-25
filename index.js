@@ -196,6 +196,9 @@
       }
       let middle=Math.floor((left+(right-left)/2));
       for(let i=left;i<right;i++){
+        if(i==middle){
+          continue;
+        }
         sticks.children[i].classList.add("sorted");
       }
       for(let i=0;i<middle;i++){
@@ -215,6 +218,9 @@
         }
       }
       for(let i=left;i<right;i++){
+        if(i==middle){
+          continue;
+        }
         sticks.children[i].classList.remove("sorted");
       }
       interval=[left, middle];
