@@ -6,7 +6,7 @@
  * It responds to mouse click using even listener.
  */
 "use strict";
-(function() {
+(function () {
   window.addEventListener("load", init);
   let button;
   let button2;
@@ -20,20 +20,20 @@
     button.addEventListener("click", sort);
   }
 
- 
+
   /**
    * Function which populates the sticks randomly
    */
   function populate() {
     button.removeEventListener("click", sort);
     let parent = qs(".yardsticks");
-    parent.innerHTML='';
+    parent.innerHTML = '';
     for (let index = 0; index < 128; index++) {
-      let stick=gen("div");
+      let stick = gen("div");
       stick.classList.add("sticks");
-      let randnum=Math.floor(Math.random() * (110)) + 100;
-      stick.style.height=randnum.toString()+'px';
-      
+      let randnum = Math.floor(Math.random() * (110)) + 100;
+      stick.style.height = randnum.toString() + 'px';
+
       parent.appendChild(stick);
     }
     button.addEventListener("click", sort);
@@ -46,7 +46,6 @@
   function sort() {
     let options = qs("p");
     if (options.children[0].children[0].checked) {
-      console.log("ree");
       mergeSort();
       return;
     }
@@ -69,7 +68,7 @@
 
 
   }
- 
+
 
   /**
    * This function is responsible for sorting the sticks using the famous
@@ -91,7 +90,7 @@
         runner = runner - 1;
         await sleep(100);
       }
-      sticks.children[runner+1].classList.add("sorted");
+      sticks.children[runner + 1].classList.add("sorted");
     }
     button2.addEventListener("click", populate);
     button.addEventListener("click", sort);
@@ -108,15 +107,15 @@
     for (let i = 0; i < sticks.children.length; i++) {
       for (let j = sticks.children.length - 1; j > 0; j--) {
         sticks.children[j].classList.add("sorted");
-        let swapped=false;
+        let swapped = false;
         if (sticks.children[j].style.height < sticks.children[j - 1].style.height) {
           sticks.insertBefore(sticks.children[j], sticks.children[j - 1]);
-          swapped=true;
+          swapped = true;
         }
         await sleep(100);
-        sticks.children[swapped?j-1:j].classList.remove("sorted");
+        sticks.children[swapped ? j - 1 : j].classList.remove("sorted");
       }
-      
+
     }
     button2.addEventListener("click", populate);
     button.addEventListener("click", sort);
@@ -127,12 +126,34 @@
    * sorting as an animation.
    */
   async function selectionSort() {
+    button.removeEventListener("click", sort);
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
-    let comparisions = 0;
+    for (let index = 0; index < sticks.children.length; index++) {
+      let minimumHeight=sticks.children[index].style.height;
+      let minIndex=index;
+      for (let candidate = index; candidate < sticks.children.length; candidate++) {
+        sticks.children[candidate].classList.add("considered");
+        if(sticks.children[candidate]<minimumHeight){
+          minimumHeight=sticks.children[candidate].style.height;
+          minIndex=candidate;
+        }
+        await sleep(100);
+        sticks.children[candidate].classList.remove("considered");
+      }
+      sticks.children[minIndex].classList.add("swapped");
+      sticks.children[index].classList.add("swapped");
+      sticks.children[minIndex].style.height=sticks.children[index].style.height;
+      sticks.children[index].style.height=minimumHeight;
+      await sleep(100);
+      sticks.children[minIndex].classList.removed("swapped");
+      sticks.children[index].classList.remove("swapped");
+      sticks.children[index].classList.add("sorted");
 
+    }
     button2.addEventListener("click", populate);
-    
+    button.addEventListener("click", sort);
+
   }
   /**
    * This function is responsible for sorting the sticks using the famous
@@ -142,32 +163,32 @@
   async function mergeSort() {
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
-    let windowSize=2;
-    while(windowSize<=sticks.children.length){
-      
-      for(let index=0;index<=sticks.children.length-windowSize;index+=windowSize){
-        for(let runner=index;runner<=index+windowSize-1;runner++){
+    let windowSize = 2;
+    while (windowSize <= sticks.children.length) {
+
+      for (let index = 0; index <= sticks.children.length - windowSize; index += windowSize) {
+        for (let runner = index; runner <= index + windowSize - 1; runner++) {
           sticks.children[runner].classList.add("sorted");
         }
-        let middle=Math.floor((windowSize-1)/2);
-        merge(index, index+middle, index+middle+1, index+windowSize-1);
+        let middle = Math.floor((windowSize - 1) / 2);
+        merge(index, index + middle, index + middle + 1, index + windowSize - 1);
         await sleep(100);
-        for(let runner=index;runner<=index+windowSize-1;runner++){
+        for (let runner = index; runner <= index + windowSize - 1; runner++) {
           sticks.children[runner].classList.remove("sorted");
         }
-        
+
       }
-      windowSize=windowSize*2;
+      windowSize = windowSize * 2;
     }
     button2.addEventListener("click", populate);
   }
 
-  async function merge(start1, end1, start2, end2){
-    let i=start1;
-    let j=start2;
+  async function merge(start1, end1, start2, end2) {
+    let i = start1;
+    let j = start2;
     let sticks = qs(".yardsticks");
-    while(i<=end1 && j<=end2){
-      if(sticks.children[i].style.height>sticks.children[j].style.height){
+    while (i <= end1 && j <= end2) {
+      if (sticks.children[i].style.height > sticks.children[j].style.height) {
         sticks.insertBefore(sticks.children[j], sticks.children[i]);
         i++;
         end1++;
@@ -181,51 +202,51 @@
   /**
    * Quick sort function with Pivot choice as the middle element
    */
-  async function quickSort(){
+  async function quickSort() {
     button2.removeEventListener("click", populate);
     let sticks = qs(".yardsticks");
-    let stack=[];
-    let interval=[0, sticks.children.length]; 
+    let stack = [];
+    let interval = [0, sticks.children.length];
     stack.push(interval);
-    while(stack.length!=0){
-      interval=stack.pop();
-      let left=interval[0];
-      let right=interval[1];
-      if(left>=right){
+    while (stack.length != 0) {
+      interval = stack.pop();
+      let left = interval[0];
+      let right = interval[1];
+      if (left >= right) {
         continue;
       }
-      let middle=Math.floor((left+(right-left)/2));
-      for(let i=left;i<right;i++){
-        if(i==middle){
+      let middle = Math.floor((left + (right - left) / 2));
+      for (let i = left; i < right; i++) {
+        if (i == middle) {
           continue;
         }
         sticks.children[i].classList.add("sorted");
       }
-      for(let i=0;i<middle;i++){
-        if(sticks.children[i].style.height>sticks.children[middle].style.height){
+      for (let i = 0; i < middle; i++) {
+        if (sticks.children[i].style.height > sticks.children[middle].style.height) {
           sticks.insertBefore(sticks.children[i], sticks.children[middle]);
-          sticks.insertBefore(sticks.children[middle], sticks.children[middle-1]);
+          sticks.insertBefore(sticks.children[middle], sticks.children[middle - 1]);
           await sleep(100);
           i--;
           middle--;
         }
       }
-      for(let i=middle+1;i<sticks.children.length;i++){
-        if(sticks.children[i].style.height<sticks.children[middle].style.height){
+      for (let i = middle + 1; i < sticks.children.length; i++) {
+        if (sticks.children[i].style.height < sticks.children[middle].style.height) {
           sticks.insertBefore(sticks.children[i], sticks.children[middle]);
           await sleep(100);
           middle++;
         }
       }
-      for(let i=left;i<right;i++){
-        if(i==middle){
+      for (let i = left; i < right; i++) {
+        if (i == middle) {
           continue;
         }
         sticks.children[i].classList.remove("sorted");
       }
-      interval=[left, middle];
+      interval = [left, middle];
       stack.push(interval);
-      interval=[middle+1, right];
+      interval = [middle + 1, right];
       stack.push(interval);
     }
 
