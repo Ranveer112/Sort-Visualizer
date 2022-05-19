@@ -143,6 +143,7 @@
       }
       sticks.children[minIndex].classList.add("swapped");
       sticks.children[index].classList.add("swapped");
+      await sleep(100);
       sticks.children[minIndex].style.height=sticks.children[index].style.height;
       sticks.children[index].style.height=minimumHeight;
       await sleep(100);
