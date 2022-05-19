@@ -146,7 +146,7 @@
       sticks.children[minIndex].style.height=sticks.children[index].style.height;
       sticks.children[index].style.height=minimumHeight;
       await sleep(100);
-      sticks.children[minIndex].classList.removed("swapped");
+      sticks.children[minIndex].classList.remove("swapped");
       sticks.children[index].classList.remove("swapped");
       sticks.children[index].classList.add("sorted");
 
