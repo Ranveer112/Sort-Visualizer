@@ -69,3 +69,11 @@ body {
 .sorted{
   background-color: red;
 }
+
+.considered{
+  background-color: orange;
+}
+
+.swapped{
+  background-color:green;
+}
